@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOS</title>
+    <style>
+        @font-face {
+            font-family: "Roboto";
+            src: url("{{url_for('static', filename='fonts/Roboto/Roboto-Regular.ttf')}}") format("truetype");
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: "Roboto";
+            src: url("{{url_for('static', filename='fonts/Roboto/Roboto-Bold.ttf')}}") format("truetype");
+            font-weight: bold;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css') }}">
+</head>
+
+<body>
+    <div class="admin-container">
+        <nav class="fixed-navbar">
+            <div class="nav-left">
+              <img src="{{url_for('static', filename='images/default-avatar.png')}}" alt="Avatar" class="avatar">
+              <span class="username">{{current_user.username}}</span>
+            </div>
+            <div class="nav-right">
+              <a href="{{url_for('admin.admin_logout')}}">Logout</a>
+            </div>
+         </nav>
+         
+        <div class="tabs">
+            <div id="menu-tab" class="tab active">Menu List</div>
+            <div id="queue-tab" class="tab">Food Queue</div>
+            <div id="report-tab" class="tab">Reports</div>
+        </div>
+
+        <div id="menu-content" class="tab-content">
+            <h1>Menu List</h1>
+            <div class="menu-list">
+                {% for item in menu_items %}
+                <div class="menu-item">
+                    <img src="/static/images/menu/{{item.id}}t.jpg" alt="{{item.name}}">
+                    <div class="details">
+                        <h2>{{item.name}}</h2>
+                        <p>Price: {{item.price}}</p>
+                    </div>
+                    <div class="toggle-availability">
+                        <label>
+                            <input data-id="{{item.id}}" {{'checked' if item.is_available else '' }}
+                                type="checkbox" class="menu-item-check">
+                            Available
+                        </label>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="queue-content" class="tab-content hidden">
+            <h1>Food Queue</h1>
+            <div class="menu-list">
+                {% for order in orders %}
+                <div class="order-container">
+                    <div class="order-header">
+                        <span>Order ID: <span class="order-id">#{{order.id}}</span></span>
+                        <span>Total Items: #{{order.order_items|length}}</span>
+                    </div>
+                    <ul class="order-items">
+                        {% for order_item in order.order_items %}
+                        <li class="order-item">
+                            <span>{{order_item.menu_item.name}}</span>
+                            <span class="item-quantity">x{{order_item.quantity}}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <button class="ready-button" onclick="markReady('#12345')">Ready for pickup</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="report-content" class="tab-content hidden">
+            <h1>Reports</h1>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/panel.js') }}" defer></script>
+</body>
+
+</html>

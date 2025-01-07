@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+   <link rel="icon" type="image/png" sizes="32x32"
+      href=" {{url_for('static', filename='images/menu/favicon-32x32.png')}}" />
+
+   <title>FOS</title>
+   <link rel="stylesheet" href="{{url_for('static', filename='css/menu.css')}}" />
+</head>
+
+<body>
+   <div class="app">
+      <nav class="fixed-navbar">
+         <div class="nav-left">
+           <img src="{{url_for('static', filename='images/default-avatar.png')}}" alt="Avatar" class="avatar">
+           <span class="username">{{current_user.username}}</span>
+         </div>
+         <div class="nav-right">
+           <a href="{{url_for('users.order_history')}}">Order History</a>
+           <a href="{{url_for('users.logout')}}">Logout</a>
+         </div>
+      </nav>
+      <div class="app__container">
+         <div class="app__container-products">
+            <div class="app__header">
+               <h1>Menu</h1>
+               <button onclick="showCart()">
+                  <img src="{{url_for('static', filename='images/menu/shopping-cart.png')}}" alt="cart" />
+               </button>
+            </div>
+            <div class="app__container-products__menu">
+               {% for product in menu_items %}
+               <div class='product {{"" if product.is_available else "out-of-stock"}}'>
+                  <div class='product__container-image'>
+                     <picture>
+                        <img src='/static/images/menu/{{product.id}}.jpg' alt='{{product.name}}'>
+                     </picture>
+                     {% if not product.is_available %}
+                     <div class="out-of-stock-banner">Out Of Stock</div>
+                     {% endif %}
+                     <div class='product__actions'>
+                        <button
+                        id='{{product.id}}'
+                        onclick='AddToCart(this, {{product.as_json_string() | safe}})' 
+                        {{"" if product.is_available else "disabled"}}>
+                           <img src=' {{url_for("static", filename="images/menu/icon-add-to-cart.svg")}}'>
+                           <span>Add to Cart</span>
+                        </button>
+                        <div class='quantity'>
+                           <div class='decrement' onclick='decrement({{product.as_json_string() | safe}}, this)'>
+                              <img src='{{url_for("static", filename="images/menu/icon-decrement-quantity.svg")}}'>
+                           </div>
+                           <span>1</span>
+                           <div class='increment' onclick='increment({{product.as_json_string() | safe}}, this)'>
+                              <img src='{{url_for("static", filename="images/menu/icon-increment-quantity.svg")}}'>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class='product__container-content'>
+                     <h2>{{product.name}}</h2>
+                     <p>{{product.price, 2}}</p>
+                  </div>
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+         <div class="app__container-order">
+            <img src="{{url_for('static', filename='images/menu/icon-remove-item.svg')}}" class="remove-cart-icon"
+               onclick="hideCart()" />
+            <h1>Your Cart (<span>0</span>)</h1>
+            <div class="app__container-order__list"></div>
+            <div class="app__container-order__total">
+               <span>Order Total</span>
+               <h2 class="total"></h2>
+            </div>
+            <div class="app__container-order__info"></div>
+            <form action="/order" method="POST">
+               <input type="textarea" name="order" id="order" hidden>
+               <button type="submit" class="app__container-order__btn">
+                  Confirm Order
+               </button>
+            </form>
+         </div>
+      </div>
+   </div>
+
+    <!-- Modal Structure for showing flashed messages -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+         <div id="modal-overlay" class="modal-overlay show">
+            <div class="modal">
+                  <h2 id="modal-title" class="{{category}}">Payment Status</h2>
+                  <p id="modal-message">{{message}}</p>
+                  <button onclick="closeModal()">Close</button>
+            </div>
+         </div>    
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+   </div>
+   <script src="{{url_for('static', filename='js/menu.js')}}"></script>
+</body>
+
+</html>
