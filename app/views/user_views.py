@@ -18,8 +18,7 @@ users_blueprint = Blueprint("users", __name__)
 @users_blueprint.route("/")
 @users_blueprint.route("/home")
 def home():
-    return f"Home page&lt;\
-<a href={url_for('users.login')}>Login</a>, <a href={url_for('users.signup')}>Signup</a>&gt;"
+    return render_template("index.html")
 
 
 @users_blueprint.route("/login", methods=["GET", "POST"])
