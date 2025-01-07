@@ -12,18 +12,18 @@
     <header>
         <div class="logo">Pepsi Lounge</div>
         <div class="auth-buttons">
-            <a href="#">Log In</a>
-            <a href="#">Sign Up</a>
+            <a href="{{url_for('users.login')}}">Log In</a>
+            <a href="{{url_for('users.signup')}}">Sign Up</a>
         </div>
     </header>
     <section class="hero-section">
         <div class="header-content">
             <h1>Delicious Meals</h1>
             <p>Order your favorite dishes from the best Lounge in Campus</p>
-            <a href="#view-menu">View Menu</a>
+            <a href="{{url_for('users.menu')}}">View Menu</a>
         </div>
         <div class="hero-image">
-            <img src="./image.png" alt="Delicious food" />
+            <img src="{{url_for('static', filename='images/hero.png')}}" alt="Delicious food" />
         </div>
     </section>
     <section>
@@ -53,7 +53,7 @@
     <section class="cta">
         <h2>Ready to Savor the Best?</h2>
         <p>Place your order now and experience the taste of happiness!</p>
-        <a id="view-menu" href="#">Get Started</a>
+        <a id="view-menu" href="{{url_for('static', filename='users.login')}}">Get Started</a>
     </section>
 
     <footer>
