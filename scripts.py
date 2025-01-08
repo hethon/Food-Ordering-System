@@ -1,9 +1,10 @@
 import os
 
+from dotenv import load_dotenv
 from app.models import MenuItem, User
 from app import db, app
 
-
+load_dotenv()
 app.app_context().push()
 
 
