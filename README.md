@@ -32,6 +32,9 @@
    - Update the `.env` file with your values for:
      - `SECRET_KEY`
      - `CHAPA_SECRET_KEY`
+     - `ADMIN_PASS`
+     - `ADMIN_USERNAME`
+     - `ADMIN_EMAIL`
 
 5. **Initialize the Database**:
    - Create the database:
@@ -52,7 +55,7 @@
      ```
 
 7. **Access the Application**:
-   - Open your browser and go to: `http://127.0.0.1:8000`
+   - Open your browser and go to: `http://127.0.0.1:8000/fos`
 
 ## Additional Scripts
 
