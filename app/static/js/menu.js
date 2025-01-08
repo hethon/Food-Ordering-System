@@ -119,6 +119,8 @@ function renderOrders() {
    }
    orderCounter.innerText = totalQuantity;
    renderOrdersDetails(currentOrders, totalPrice);
+   const cartWrapper=document.querySelector(".cart__wrapper");
+   cartWrapper.classList.remove("cartWrapper__show");
 }
 
 function renderOrdersDetails(orders, totalPrice) {
@@ -162,10 +164,14 @@ function updateStorage(data) {
 function showCart() {
    const cart = document.querySelector(".app__container-order");
    cart.classList.toggle("show__app__container-order");
+   const cartWrapper=document.querySelector(".cart__wrapper");
+   cartWrapper.classList.toggle("cartWrapper__show");
 }
 function hideCart() {
    const cart = document.querySelector(".app__container-order");
    cart.classList.remove("show__app__container-order");
+   const cartWrapper=document.querySelector(".cart__wrapper");
+   cartWrapper.classList.remove("cartWrapper__show");
 }
 
 // modal
