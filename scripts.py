@@ -1,6 +1,8 @@
 import os
 
 from dotenv import load_dotenv
+import sqlalchemy as sa
+
 from app.models import MenuItem, User
 from app import db, app
 
@@ -83,6 +85,11 @@ def add_admin_account():
     username = os.getenv("ADMIN_USERNAME")
     email = os.getenv("ADMIN_EMAIL")
     PASS = os.getenv("ADMIN_PASS")
+
+    user = db.session.scalar(sa.select(User).where(User.username == username))
+    if user:
+        print("Admin account has already been added")
+        return
     user = User(username=username, email=email, role="admin")
     user.set_password(PASS)
     db.session.add(user)
