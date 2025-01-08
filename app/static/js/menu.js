@@ -93,7 +93,7 @@ function renderOrders() {
    if (currentOrders.length < 1) {
       orderContainer.innerHTML = `
     <div class='app__container-order__list-empty'>
-    <img src='/static/images/menu/illustration-empty-cart.svg'>
+    <img src='/fos/static/images/menu/illustration-empty-cart.svg'>
     <span>Your added items will appear here</span>
     </div>
     `;
@@ -110,7 +110,7 @@ function renderOrders() {
         <span>@ $${order.price.toFixed(2)}</span>
         <span>$${order.totalPrice.toFixed(2)}</span>
         </div>
-        <img src= '/static/images/menu/icon-remove-item.svg' id='${
+        <img src= '/fos/static/images/menu/icon-remove-item.svg' id='${
            order.id
         }' onclick='removeOrder(this.id)'>
         </div>
