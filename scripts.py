@@ -83,7 +83,7 @@ def add_admin_account():
     email = os.getenv("ADMIN_EMAIL")
     PASS = os.getenv("ADMIN_PASS")
     user = User(username=username, email=email, role="admin")
-    user.set_password(os.getenv(PASS))
+    user.set_password(PASS)
     db.session.add(user)
     db.session.commit()
 
