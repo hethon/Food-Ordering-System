@@ -68,6 +68,7 @@ def add_mock_menu():
     for item in menu_items:
         db.session.add(
             MenuItem(
+                id=item["id"],
                 name=item["name"],
                 price=item["price"],
                 is_available=item["is_available"],
