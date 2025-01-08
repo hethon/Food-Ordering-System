@@ -37,7 +37,7 @@
                <div class='product {{"" if product.is_available else "out-of-stock"}}'>
                   <div class='product__container-image'>
                      <picture>
-                        <img src='/static/images/menu/{{product.id}}.jpg' alt='{{product.name}}'>
+                        <img src="{{url_for('static', filename='images/menu/')}}{{product.id}}.jpg" alt="{{product.name}}">
                      </picture>
                      {% if not product.is_available %}
                      <div class="out-of-stock-banner">Out Of Stock</div>
