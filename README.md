@@ -8,7 +8,7 @@
 
 1. **Clone the Repository**:
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/hethon/Food-Ordering-System.git
    cd hethon-Food-Ordering-System
    ```
 
