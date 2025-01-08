@@ -2,10 +2,7 @@
 # How to Run the Food Ordering System Project
 
 ## Prerequisites
-1. Ensure you have Python 3.7 or above installed on your machine.
-2. Install the required system dependencies:
-   - SQLite (for database support).
-   - Virtualenv (optional but recommended for creating isolated environments).
+1. Ensure you have Python 3.8 or above installed on your machine.
 
 ## Setting Up the Project
 
