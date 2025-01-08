@@ -63,28 +63,30 @@
                   </div>
                   <div class='product__container-content'>
                      <h2>{{product.name}}</h2>
-                     <p>{{product.price, 2}}</p>
+                     <p>{{product.price}}</p>
                   </div>
                </div>
                {% endfor %}
             </div>
          </div>
-         <div class="app__container-order">
-            <img src="{{url_for('static', filename='images/menu/icon-remove-item.svg')}}" class="remove-cart-icon"
-               onclick="hideCart()" />
-            <h1>Your Cart (<span>0</span>)</h1>
-            <div class="app__container-order__list"></div>
-            <div class="app__container-order__total">
-               <span>Order Total</span>
-               <h2 class="total"></h2>
+         <div class="cart__wrapper">
+            <div class="app__container-order">
+               <img src="{{url_for('static', filename='images/menu/icon-remove-item.svg')}}" class="remove-cart-icon"
+                  onclick="hideCart()" />
+               <h1>Your Cart (<span>0</span>)</h1>
+               <div class="app__container-order__list"></div>
+               <div class="app__container-order__total">
+                  <span>Order Total</span>
+                  <h2 class="total"></h2>
+               </div>
+               <div class="app__container-order__info"></div>
+               <form action="order" method="POST">
+                  <input type="textarea" name="order" id="order" hidden>
+                  <button type="submit" class="app__container-order__btn">
+                     Confirm Order
+                  </button>
+               </form>
             </div>
-            <div class="app__container-order__info"></div>
-            <form action="order" method="POST">
-               <input type="textarea" name="order" id="order" hidden>
-               <button type="submit" class="app__container-order__btn">
-                  Confirm Order
-               </button>
-            </form>
          </div>
       </div>
    </div>
