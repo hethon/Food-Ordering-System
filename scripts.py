@@ -78,12 +78,15 @@ def add_mock_menu():
 
 
 def add_admin_account():
-    user = User(username="admin", email="admin@fos.com", role="admin")
-    user.set_password(os.getenv("ADMIN_PASS"))
+    username = os.getenv("ADMIN_USERNAME")
+    email = os.getenv("ADMIN_EMAIL")
+    PASS = os.getenv("ADMIN_PASS")
+    user = User(username=username, email=email, role="admin")
+    user.set_password(os.getenv(PASS))
     db.session.add(user)
     db.session.commit()
 
 
 if __name__ == "__main__":
-    # add_mock_menu()
-    pass
+    add_mock_menu()
+    add_admin_account()
