@@ -48,11 +48,11 @@
 6. **Run the Development Server**:
    - Use Flask's built-in development server:
      ```bash
-     flask run
+     gunicorn -e SCRIPT_NAME=/fos run:app
      ```
 
 7. **Access the Application**:
-   - Open your browser and go to: [http://127.0.0.1:5000](http://127.0.0.1:5000)
+   - Open your browser and go to: `http://127.0.0.1:8000`
 
 ## Additional Scripts
 
