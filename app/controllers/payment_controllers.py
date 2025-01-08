@@ -102,8 +102,7 @@ def get_checkout_url(order_items):
         "currency": "ETB",
         "email": current_user.email,
         "tx_ref": tx_ref,
-        # "callback_url": "http://127.0.0.1:5000/menu",
-        "return_url": f"http://hethon.tech/fos/menu?tx_ref={tx_ref}",
+        "return_url": f"{os.getenv("ROOT_URL")}/menu?tx_ref={tx_ref}",
         "customization": {
             "title": "FOS",
             "description": "Food Ordering System",
