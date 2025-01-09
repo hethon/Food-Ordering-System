@@ -235,9 +235,6 @@ body {
   color: #777;
 }
 .ready-button {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
   padding: 5px 10px;
   background-color: hsl(14, 86%, 42%);
   color: white;
@@ -245,4 +242,6 @@ body {
   border-radius: 3px;
   font-size: 12px;
   cursor: pointer;
+  margin-top: 10px;
+  float: right;
 }
