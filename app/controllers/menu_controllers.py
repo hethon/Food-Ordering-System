@@ -37,9 +37,15 @@ class _Order:
 
 
 def get_active_orders():
+    """return orders with completed payment"""
+
     query = sa.select(Order).where(Order.status == "pending")
     for order in db.session.scalars(query):
-        yield _Order(order)
+        # the payment associated with the order
+        payment = db.session.scalar(order.payment.select())
+        if payment.get_status() == "completed":
+            # yield only if the payment is completed
+            yield _Order(order)
 
 
 def set_menu_item_availability(menu_item_id, new_state):
