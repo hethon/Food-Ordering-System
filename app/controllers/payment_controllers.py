@@ -95,8 +95,6 @@ def get_checkout_url(order_items):
     order = _register_order(order_items, current_user)
     _initialize_payment(order, tx_ref, current_user)
 
-    db.session.commit()
-
     payload = {
         "amount": str(order.total_price),
         "currency": "ETB",
@@ -113,12 +111,19 @@ def get_checkout_url(order_items):
         "Content-Type": "application/json",
     }
 
-    response = requests.post(
-        "https://api.chapa.co/v1/transaction/initialize",
-        json=payload,
-        headers=headers,
-    )
-    checkout_url = response.json()["data"]["checkout_url"]
+    try:
+        response = requests.post(
+            "https://api.chapa.co/v1/transaction/initialize",
+            json=payload,
+            headers=headers,
+        )
+        
+        checkout_url = response.json()["data"]["checkout_url"]
+    except Exception as e:
+        raise e
+    else:
+        # commit only if we get checkout_url successfully
+        db.session.commit()
 
     return checkout_url
 
